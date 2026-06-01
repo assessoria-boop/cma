@@ -6,7 +6,7 @@
   <title>Centro de Medicina Animal – Clínica Veterinária 24h | Maraponga, Fortaleza/CE</title>
   <meta name="description" content="Clínica Veterinária 24h em Maraponga, Fortaleza. Consultas, cirurgias, internamento, raio-X e diagnóstico no local. 10 anos de experiência. Atendimento imediato." />
   <link rel="icon" type="image/webp" href="logo.webp" />
-  <link rel="preload" as="image" href="hero.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="logo.webp" fetchpriority="high" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
   <link rel="dns-prefetch" href="https://www.google.com" />
   <!-- Google Tag Manager (carregamento diferido) -->
@@ -160,18 +160,15 @@
       overflow: hidden;
     }
 
-    .hero-bg {
+    .hero::before {
+      content: '';
       position: absolute;
       inset: 0;
-      z-index: 0;
-    }
-
-    .hero-bg img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
+      background-image: url('hero.webp');
+      background-size: cover;
+      background-position: center;
       opacity: 0.3;
+      z-index: 0;
     }
 
     .hero-overlay {
@@ -684,13 +681,10 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg">
-    <img src="hero.webp" alt="" fetchpriority="high" decoding="async" />
-  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-logo">
-      <img src="logo.webp" alt="Centro de Medicina Animal" />
+      <img src="logo.webp" alt="Centro de Medicina Animal" fetchpriority="high" />
     </div>
     <p class="hero-clinica-nome">Centro de Medicina Animal</p>
     <h1>Clínica <span>Veterinária 24h</span></h1>
