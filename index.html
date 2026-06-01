@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PL4B8LS8');</script>
-  <!-- End Google Tag Manager -->
   <title>Centro de Medicina Animal – Clínica Veterinária 24h | Maraponga, Fortaleza/CE</title>
   <meta name="description" content="Clínica Veterinária 24h em Maraponga, Fortaleza. Consultas, cirurgias, internamento, raio-X e diagnóstico no local. 10 anos de experiência. Atendimento imediato." />
   <link rel="icon" type="image/webp" href="logo.webp" />
   <link rel="preload" as="image" href="hero.webp" fetchpriority="high" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.google.com" />
+  <!-- Google Tag Manager (carregamento diferido) -->
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    (function(){
+      var loaded=false;
+      function loadGTM(){
+        if(loaded)return;loaded=true;
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PL4B8LS8');
+      }
+      ['scroll','click','touchstart','mousemove','keydown'].forEach(function(e){window.addEventListener(e,loadGTM,{once:true,passive:true});});
+      setTimeout(loadGTM,4000);
+    })();
+  </script>
+  <!-- End Google Tag Manager -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -647,9 +660,6 @@
   </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PL4B8LS8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 <!-- TOPO -->
 <div class="topo">
@@ -675,7 +685,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg">
-    <img src="hero.webp" alt="" fetchpriority="high" decoding="sync" />
+    <img src="hero.webp" alt="" fetchpriority="high" decoding="async" />
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -898,9 +908,7 @@
         Atendimento Imediato
       </a>
     </div>
-    <div class="mapa">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.02147913154!2d-38.5724254!3d-3.8054346999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74d004a3a0e03%3A0xd4935863277ae7ec!2sCentro%20de%20Medicina%20Animal!5e0!3m2!1spt-BR!2sbr!4v1780066150951!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização Centro de Medicina Animal"></iframe>
-    </div>
+    <div class="mapa" id="mapaWrap"></div>
   </div>
 </div>
 
@@ -972,9 +980,22 @@
     if (Math.abs(diff) > 40) moverCarrossel(diff > 0 ? 1 : -1);
   });
 
-  setInterval(function() { moverCarrossel(1); }, 5000);
+  setTimeout(function(){ setInterval(function() { moverCarrossel(1); }, 5000); }, 3000);
 
   window.addEventListener('resize', atualizarCarrossel);
+
+  // Mapa: carrega só quando o elemento entra na viewport
+  (function(){
+    var wrap = document.getElementById('mapaWrap');
+    if(!wrap) return;
+    var obs = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){
+        wrap.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.02147913154!2d-38.5724254!3d-3.8054346999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74d004a3a0e03%3A0xd4935863277ae7ec!2sCentro%20de%20Medicina%20Animal!5e0!3m2!1spt-BR!2sbr!4v1780066150951!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização Centro de Medicina Animal"></iframe>';
+        obs.disconnect();
+      }
+    },{rootMargin:'300px'});
+    obs.observe(wrap);
+  })();
 </script>
 </body>
 </html>
